@@ -4,7 +4,7 @@
     "segment": "Малый бизнес",
     "role": "Сотрудник",
     "organizations": 3,
-    "currentMethod": "КЭП на токене",
+    "currentMethod": "SMS",
     "mobileApp": 1,
     "signatures": {
         "common": {

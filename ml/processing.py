@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 
 
 class Processor:
@@ -10,19 +11,17 @@ class Processor:
 
         segment = ["Малый бизнес", "Средний бизнес", "Крупный бизнес"]
         role = ["ЕИО", "Сотрудник"]
-        current_method = ["SMS", "PayControl", "КЭП на токене", "КЭП в приложении"]
         available_methods = ["SMS", "PayControl", "КЭП на токене", "КЭП в приложении"]
 
-        segment_one_hot = [[0] * len(segment)]
-        role_one_hot = [[0] * len(role)]
-        current_method_one_hot = [[0] * len(current_method)]
-        available_methods_one_hot = [[0] * len(available_methods)]
+        count = 1 if isinstance(self.json, dict) else len(self.json)
+        segment_one_hot = np.zeros((count, len(segment)), dtype=np.int8)
+        role_one_hot = np.zeros((count, len(role)), dtype=np.int8)
+        available_methods_one_hot = np.zeros((count, len(available_methods)), dtype=np.int8)
 
         for i in range(len(df)):
             row = df.iloc[i]
             segment_one_hot[i][segment.index(row["segment"])] += 1
             role_one_hot[i][role.index(row["role"])] += 1
-            current_method_one_hot[i][current_method.index(row["currentMethod"])] += 1
             for method in row["availableMethods"]:
                 available_methods_one_hot[i][available_methods.index(method)] += 1
 
@@ -35,14 +34,11 @@ class Processor:
         df[list(map(lambda x: "role." + x, role))] = role_one_hot
 
         df.drop("currentMethod", axis=1, inplace=True)
-        df[list(map(lambda x: "current_method." + x, current_method))] = current_method_one_hot
 
         df.drop("availableMethods", axis=1, inplace=True)
         df[list(map(lambda x: "available_methods." + x, available_methods))] = available_methods_one_hot
 
         df.drop("clientId", axis=1, inplace=True)
         df.drop("organizationId", axis=1, inplace=True)
-
-        df["reason_category_type"] = None
 
         return df

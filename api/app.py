@@ -4,6 +4,7 @@ import json
 
 from ml.validation import JsonData
 from ml.processing import Processor
+from ml.prediction import predict
 
 app = FastAPI(
     title="Hakatonchik"
@@ -18,13 +19,88 @@ async def upload_json(file: UploadFile = File(...)):
     try:
         JsonData.model_validate(data)
 
-        proc = Processor(data)
-        df = proc.preprocess()
+        if data["currentMethod"] != "SMS":
+            pass
+            #NO ADVICES
+        else:
+            message_on_entry = ""
+            message_after_oper = ""
+            message_before_vip_oper = ""
 
-        print(df)
-        return data
+            proc = Processor(data)
+            df = proc.preprocess()
+            prediction = predict(df)
+            match prediction:
+                case 1:
+                    with open("source/message_text.json", "r") as file:
+                        msgjson = json.load(file)
+                        message_on_entry = msgjson["paycontrol"]["base"]["on_entry"]
+                        message_after_oper = msgjson["paycontrol"]["base"]["after_oper"]
+                        message_before_vip_oper = msgjson["paycontrol"]["base"]["before_vip_oper"]
+                case 2:
+                    with open("source/message_text.json", "r") as file:
+                        msgjson = json.load(file)
+                        message_on_entry = msgjson["paycontrol"]["sms_reported"]["on_entry"]
+                        message_after_oper = msgjson["paycontrol"]["sms_reported"]["after_oper"]
+                        message_before_vip_oper = msgjson["paycontrol"]["sms_reported"]["before_vip_oper"]
+                case 3:
+                    with open("source/message_text.json", "r") as file:
+                        msgjson = json.load(file)
+                        message_on_entry = msgjson["paycontrol"]["is_available_but_not_used"]["on_entry"]
+                        message_after_oper = msgjson["paycontrol"]["is_available_but_not_used"]["after_oper"]
+                        message_before_vip_oper = msgjson["paycontrol"]["is_available_but_not_used"]["before_vip_oper"]
+                case 4:
+                    with open("source/message_text.json", "r") as file:
+                        msgjson = json.load(file)
+                        message_on_entry = msgjson["paycontrol"]["no_app"]["on_entry"]
+                        message_after_oper = msgjson["paycontrol"]["no_app"]["after_oper"]
+                        message_before_vip_oper = msgjson["paycontrol"]["no_app"]["before_vip_oper"]
+                case 5:
+                    with open("source/message_text.json", "r") as file:
+                        msgjson = json.load(file)
+                        message_on_entry = msgjson["CAP"]["base"]["on_entry"]
+                        message_after_oper = msgjson["CAP"]["base"]["after_oper"]
+                        message_before_vip_oper = msgjson["CAP"]["base"]["before_vip_oper"]
+                case 6:
+                    with open("source/message_text.json", "r") as file:
+                        msgjson = json.load(file)
+                        message_on_entry = msgjson["CAP"]["sms_reported"]["on_entry"]
+                        message_after_oper = msgjson["CAP"]["sms_reported"]["after_oper"]
+                        message_before_vip_oper = msgjson["CAP"]["sms_reported"]["before_vip_oper"]
+                case 7:
+                    with open("source/message_text.json", "r") as file:
+                        msgjson = json.load(file)
+                        message_on_entry = msgjson["CAP_with_token"]["base"]["on_entry"]
+                        message_after_oper = msgjson["CAP_with_token"]["base"]["after_oper"]
+                        message_before_vip_oper = msgjson["CAP_with_token"]["base"]["before_vip_oper"]
+                case 8:
+                    with open("source/message_text.json", "r") as file:
+                        msgjson = json.load(file)
+                        message_on_entry = msgjson["CAP_with_token"]["for_employers_with_a_lot_of_orgs"]["on_entry"]
+                        message_after_oper = msgjson["CAP_with_token"]["for_employers_with_a_lot_of_orgs"]["after_oper"]
+                        message_before_vip_oper = msgjson["CAP_with_token"]["for_employers_with_a_lot_of_orgs"]["before_vip_oper"]
+                case 9:
+                    with open("source/message_text.json", "r") as file:
+                        msgjson = json.load(file)
+                        message_on_entry = msgjson["CAP_with_token"]["sms_reported"]["on_entry"]
+                        message_after_oper = msgjson["CAP_with_token"]["sms_reported"]["after_oper"]
+                        message_before_vip_oper = msgjson["CAP_with_token"]["sms_reported"]["before_vip_oper"]
+                case 10:
+                    with open("source/message_text.json", "r") as file:
+                        msgjson = json.load(file)
+                        message_on_entry = msgjson["CAP_with_token"]["is_available_but_not_used"]["on_entry"]
+                        message_after_oper = msgjson["CAP_with_token"]["is_available_but_not_used"]["after_oper"]
+                        message_before_vip_oper = msgjson["CAP_with_token"]["is_available_but_not_used"]["before_vip_oper"]
+                case 11:
+                    with open("source/message_text.json", "r") as file:
+                        msgjson = json.load(file)
+                        message_on_entry = msgjson["CAP"]["has_an_app_but_not_used"]["on_entry"]
+                        message_after_oper = msgjson["CAP"]["has_an_app_but_not_used"]["after_oper"]
+                        message_before_vip_oper = msgjson["CAP"]["has_an_app_but_not_used"]["before_vip_oper"]
+
+            return prediction, message_on_entry, message_after_oper, message_before_vip_oper
     except Exception as e:
-        print(f'Ошибка валидации: {e}')
+        print(e)
 
 
 @app.get("/")
@@ -77,4 +153,3 @@ async def get_upload_page():
         </body>
     </html>
     """)
-
