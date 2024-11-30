@@ -1,4 +1,21 @@
 {
-  "client": "client",
-  "org": "org"
+    "clientId": "client081",
+    "organizationId": "organization982",
+    "segment": "Малый бизнес",
+    "role": "Сотрудник",
+    "organizations": 3,
+    "currentMethod": "КЭП на токене",
+    "mobileApp": 1,
+    "signatures": {
+        "common": {
+            "mobile": 3,
+            "web": 10
+        },
+        "special": {
+            "mobile": 5,
+            "web": 6
+        }
+    },
+    "availableMethods": ["SMS", "КЭП на токене"],
+    "claims": 0
 }

@@ -2,6 +2,7 @@ from fastapi import FastAPI, File, UploadFile
 from fastapi.responses import HTMLResponse
 import json
 
+from ml.validation import JsonData
 from ml.processing import Processor
 
 app = FastAPI(
@@ -13,10 +14,17 @@ app = FastAPI(
 async def upload_json(file: UploadFile = File(...)):
     content = await file.read()
     data = json.loads(content)
-    print(data)
-    proc = Processor(data)
-    proc.process()
-    return data
+
+    try:
+        JsonData.model_validate(data)
+
+        proc = Processor(data)
+        df = proc.preprocess()
+
+        print(df)
+        return data
+    except Exception as e:
+        print(f'Ошибка валидации: {e}')
 
 
 @app.get("/")
