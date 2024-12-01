@@ -27,8 +27,16 @@ async def upload_json(file: UploadFile = File(...), textOption: str = Form(...))
         JsonData.model_validate(data)
 
         if data["currentMethod"] != "SMS":
-            pass
-            #NO ADVICES
+            message_on_entry = "Данный пользователь уже использует один из оптимальных способов подписания документов - рекомендация не требуется"
+            message_after_oper = "Данный пользователь уже использует один из оптимальных способов подписания документов - рекомендация не требуется"
+            message_before_vip_oper = "Данный пользователь уже использует один из оптимальных способов подписания документов - рекомендация не требуется"
+            response = {
+                "prediction": -1,
+                "message_on_entry": message_on_entry,
+                "message_after_oper": message_after_oper,
+                "message_before_vip_oper": message_before_vip_oper
+            }
+            return response
         else:
             message_on_entry = ""
             message_after_oper = ""
@@ -113,5 +121,7 @@ async def upload_json(file: UploadFile = File(...), textOption: str = Form(...))
                 "message_before_vip_oper": message_before_vip_oper
             }
             return response
+        
+        
     except Exception as e:
         print(e)
