@@ -28,18 +28,6 @@ const FileUploader = () => {
     formData.append('file', file);
     formData.append('textOption', selectedOption); // Передаем выбранный текст
 
-   /* try {
-      const response = axios.post('https://example.com/upload', formData, {
-        headers: {
-        'Content-Type': 'multipart/form-data',
-        }
-        })
-        .then(response => {
-        console.log('Файл успешно загружен:', response.data);
-        })
-        .catch(error => {
-        console.error('Ошибка при загрузке файла:', error);
-        });*/
     try {
       const response = await fetch('http://localhost:8000/uploadjson/', {
         method: 'POST',
@@ -50,13 +38,11 @@ const FileUploader = () => {
       if (!response.ok) {
         throw new Error(`Ошибка сервера: ${response.status}`);
       }
-      //console.log(response.text());
 
       const data = await response.text();
       const data1 = JSON.parse(data)
 
       if (selectedOption === 'option1'){
-        //console.log(data.message_on_entry)
         setResponseText(data1.message_on_entry);
       }
       else if (selectedOption === 'option2'){
@@ -65,8 +51,6 @@ const FileUploader = () => {
       else if(selectedOption === 'option3'){
         setResponseText(data1.message_before_vip_oper)
       }
-     //const data1 = JSON.parse(data)
-     //setResponseText(data1.message_on_entry);
       setMessage('Данные успешно отправлены!');
 
     } catch (error) {
