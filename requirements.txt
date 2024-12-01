@@ -1,8 +1,8 @@
-fastapi
-pydantic
-pydantic-settings
-uvicorn
-fastapi-cache
-python-multipart
-pandas
-scikit-learn
+fastapi==0.115.5
+pydantic==2.10.2
+pydantic-settings==2.6.1
+uvicorn==0.32.1
+fastapi-cache==0.1.0
+python-multipart==0.0.18
+pandas==2.2.3
+scikit-learn==1.5.2
