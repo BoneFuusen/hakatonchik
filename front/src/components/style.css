@@ -1,0 +1,135 @@
+body {
+  background-image: url("../../BackG.jpg");
+  background-size: cover;
+  font-family: 'SEGOE UI';
+}
+
+h1{
+  font-size: 50px;
+}
+
+.uploader-container {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.drop-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 400px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 2px dashed #666;
+  border-radius: 10px;
+  background: transparent;
+  backdrop-filter: blur(10px);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.drop-area:hover {
+  background: transparent;
+  backdrop-filter: blur(15px);
+  border-color: #333;
+}
+
+.file-label {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.file-label:hover {
+  color: #f1f1f1;
+}
+
+.file-input {
+  display: none; /* Скрываем стандартное поле загрузки */
+}
+
+.drop-area::after {
+  content: 'Или перетащите файл сюда';
+  font-size: 14px;
+  color: #666;
+  margin-top: 10px;
+  display: block;
+}
+
+
+.option-selector {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 400px;
+  margin: 20px auto;
+  font-size: 25px;
+}
+
+#textOption {
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  color: #333;
+  border-radius: 5px;
+  background: transparent;
+  backdrop-filter: blur(15px);
+}
+
+.option-selector .text-option{
+  text-align: center;
+}
+
+
+.submit-btn {
+  background-color: #dd1e3e;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.submit-btn:hover {
+  background-color: #ba213b;
+}
+
+.message {
+  margin-top: 20px;
+  color: rgb(0, 128, 62);
+  font-size: 16px;
+}
+
+.response-text {
+  opacity: 0;
+  font-size: 20px;
+  text-align: center;
+  transform: translateY(20px);
+  animation: fadeIn 0.5s ease-out forwards;
+  background-color: #ffc4cd;
+  padding: 15px;
+  border-radius: 20px;
+  border: 1px solid #4b4b4b;
+  font-size: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+  margin-left: 100px;
+  margin-right: 100px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
