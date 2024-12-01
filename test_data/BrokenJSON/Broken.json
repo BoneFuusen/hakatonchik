@@ -1,0 +1,21 @@
+{
+    "segment": "СИГМАco",
+    "role": "Аваавав",
+    "organizations": 1,
+    "currentMethod": "SMS",
+    "mobileApp": true,
+    "signatures": {
+        "common": {
+            "mobile": 28,
+            "web": 4
+        },
+        "special": {
+            "mobile": 5,
+            "web": 4
+        }
+    },
+    "availableMethods": [
+        "SMS"
+    ],
+    "claims": 0
+}

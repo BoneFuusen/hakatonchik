@@ -1,0 +1,23 @@
+{
+    "clientId": "User6",
+    "organizationId": "Comp6",
+    "segment": "\u041c\u0430\u043b\u044b\u0439 \u0431\u0438\u0437\u043d\u0435\u0441",
+    "role": "\u0415\u0418\u041e",
+    "organizations": 1,
+    "currentMethod": "PayControl",
+    "mobileApp": true,
+    "signatures": {
+        "common": {
+            "mobile": 20,
+            "web": 4
+        },
+        "special": {
+            "mobile": 12,
+            "web": 4
+        }
+    },
+    "availableMethods": [
+        "SMS"
+    ],
+    "claims": 3
+}

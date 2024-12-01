@@ -1,0 +1,23 @@
+{
+    "clientId": "User2",
+    "organizationId": "Comp2",
+    "segment": "Крупный бизнес",
+    "role": "Сотрудник",
+    "organizations": 53,
+    "currentMethod": "SMS",
+    "mobileApp": false,
+    "signatures": {
+        "common": {
+            "mobile": 0,
+            "web": 16
+        },
+        "special": {
+            "mobile": 0,
+            "web": 1
+        }
+    },
+    "availableMethods": [
+        "SMS"
+    ],
+    "claims": 9
+}

@@ -1,0 +1,23 @@
+{
+    "clientId": "User1",
+    "organizationId": "Comp1",
+    "segment": "Средний бизнес",
+    "role": "ЕИО",
+    "organizations": 1,
+    "currentMethod": "SMS",
+    "mobileApp": true,
+    "signatures": {
+        "common": {
+            "mobile": 15,
+            "web": 2
+        },
+        "special": {
+            "mobile": 0,
+            "web": 1
+        }
+    },
+    "availableMethods": [
+        "SMS"
+    ],
+    "claims": 12
+}
